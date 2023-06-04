@@ -4,6 +4,6 @@
     {
         public string sender_id { get; set; }
         public string reciver_id { get; set; }
-        public string Content { get; set; }
+        public string content { get; set; }
     }
 }
