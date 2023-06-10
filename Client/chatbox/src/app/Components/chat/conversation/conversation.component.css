@@ -61,7 +61,8 @@ img {
 
 .msg-inbox {
     border: 1px solid #ccc;
-    overflow: hidden;
+    overflow-y: scroll;
+    max-height: 37rem;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
 }
@@ -70,7 +71,23 @@ img {
 .chats {
     padding: 30px 15px 0 25px;
 }
-
+.chat-message{
+  padding: 10px;
+  margin-bottom: 10px;
+}
+.sender{
+background-color: #21963f;
+color: #FFF;
+align-self: flex-end;
+max-width: 54%;
+margin-left: 48%;
+}
+.reciver{
+  background-color: #E0E0E0;
+  color: #000;
+  align-self: flex-start;
+  max-width: 53%;
+}
 .msg-page {
     max-height: 500px;
     overflow-y: auto;

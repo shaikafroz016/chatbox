@@ -24,4 +24,7 @@ export class HttpcallsService {
   getUsers(){
     return this.http.get(this.url+'auth/Users')
   }
+  savemessage(data:any){
+    return this.http.post(this.url+`Chat/saveMessages`,data)
+  }
 }

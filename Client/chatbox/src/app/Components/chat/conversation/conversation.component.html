@@ -25,76 +25,15 @@
       <!-- msg-header section ends -->
 
       <!-- Chat inbox  -->
+      <div class="grid-control">
       <div class="chat-page">
         <div class="msg-inbox">
           <div class="chats">
-            <!-- Message container -->
-            <div class="msg-page" *ngFor="let chat in data">
-              <!-- Incoming messages -->
+            <div *ngFor="let chat of data">
+              <div [ngClass]="{'sender':chat.messageType=='Sender' , 'reciver':chat.messageType=='Reciver'}" class="chat-message">
+               <p> {{chat.chat}}</p>
 
-              <div class="received-chats">
-                <div class="received-chats-img">
-                  <img src="../img2.png" />
-                </div>
-                <div class="received-msg">
-                  <div class="received-msg-inbox">
-                    <p>
-                      {{chat.chat}}
-                    </p>
-                    <span class="time">18:06 PM | July 24</span>
-                  </div>
-                </div>
-              </div>
-              <!-- Outgoing messages -->
-              <div class="outgoing-chats">
-                <div class="outgoing-chats-img">
-                  <img src="../img1.png" />
-                </div>
-                <div class="outgoing-msg">
-                  <div class="outgoing-chats-msg">
-                    <p>
-                      Hi riya , Lorem ipsum dolor sit amet consectetur
-                      adipisicing elit. Illo nobis deleniti earum magni
-                      recusandae assumenda.
-                    </p>
-                    <p >
-                      Lorem ipsum dolor sit amet consectetur.
-                    </p>
-
-                    <span class="time">18:30 PM | July 24</span>
-                  </div>
-                </div>
-              </div>
-              <div class="received-chats">
-                <div class="received-chats-img">
-                  <img src="../img2.png" />
-                </div>
-                <div class="received-msg">
-                  <div class="received-msg-inbox">
-                    <p class="single-msg">
-                      Hi !! This is message from John Lewis. Lorem ipsum, dolor
-                      sit amet consectetur adipisicing elit. iste distinctio
-                      expedita illo!
-                    </p>
-                    <span class="time">18:31 PM | July 24</span>
-                  </div>
-                </div>
-              </div>
-              <div class="outgoing-chats">
-                <div class="outgoing-chats-img">
-                  <img src="../img1.png" />
-                </div>
-                <div class="outgoing-msg">
-                  <div class="outgoing-chats-msg">
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                      Velit, sequi.
-                    </p>
-                    <p>{{reciver.userId}}</p>
-                    <span class="time">18:34 PM | July 24</span>
-                  </div>
-                </div>
-              </div>
+            </div>
             </div>
           </div>
 
@@ -102,18 +41,22 @@
 
           <div class="msg-bottom">
             <div class="input-group">
+              <form [formGroup]="sendform">
               <input
                 type="text"
                 class="form-control"
+                formControlName="message"
                 placeholder="Write message..."
               />
 
-              <span class="input-group-text send-icon">
+              <span (click)="onsend()" class="input-group-text send-icon">
                 <i class="bi bi-send"></i>
               </span>
+            </form>
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   </body>
