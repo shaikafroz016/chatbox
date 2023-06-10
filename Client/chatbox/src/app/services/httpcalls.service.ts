@@ -21,4 +21,7 @@ export class HttpcallsService {
   signup(data:any){
     return this.http.post(this.url+`auth/register`,data)
   }
+  getUsers(){
+    return this.http.get(this.url+'auth/Users')
+  }
 }

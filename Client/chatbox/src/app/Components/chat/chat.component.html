@@ -1,0 +1,33 @@
+<div class="container" style="padding-left: 10%;">
+
+  <div class="row">
+    <app-header></app-header>
+    <div class="col-md-3">
+      <table class="table " style="margin-top: 2rem;">
+        <thead>
+          <tr>
+            <td>
+              <div class="input-group">
+                <input class="form-control border-end-0 border rounded-pill" type="search" value="search" id="example-search-input">
+                <span class="input-group-append">
+                    <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button">
+                      <i class="bi bi-search"></i>
+                    </button>
+                </span>
+            </div>
+            </td>
+
+
+          </tr>
+        </thead>
+        <tbody *ngFor="let  user of AllUsers"  (click)="selected(user)">
+         <tr ><td>{{user.name}}</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-7">
+      <app-conversation [reciver]="reciver"></app-conversation>
+    </div>
+  </div>
+</div>
+

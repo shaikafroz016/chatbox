@@ -1,6 +1,8 @@
 ﻿
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -14,6 +16,7 @@ namespace WebApplication1.Controllers
     public class AuthController : ControllerBase
     {
         private readonly UserManager<IdentityUser> _userManager;
+       
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IConfiguration _configuration;
 
@@ -26,7 +29,19 @@ namespace WebApplication1.Controllers
             _roleManager = roleManager;
             _configuration = configuration;
         }
-
+        [HttpGet]
+        [Authorize]
+        [Route("Users")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users = await _userManager.Users.ToListAsync();
+            var userList=users.Select(e=>new
+            {
+                userId=e.Id,
+                Name=e.UserName
+            }).ToList();
+            return Ok(userList);
+        }
         [HttpPost]
         [Route("login")]
         public async Task<IActionResult> Login([FromBody] LoginModel model)
@@ -52,7 +67,9 @@ namespace WebApplication1.Controllers
                 return Ok(new
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
-                    expiration = token.ValidTo
+                    expiration = token.ValidTo,
+                    userId=user.Id,
+                    userName=user.UserName
                 });
             }
             return Unauthorized();

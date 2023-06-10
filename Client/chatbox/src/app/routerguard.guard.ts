@@ -8,6 +8,7 @@ export const routerguardGuard: CanActivateFn = (route, state) => {
     tokendata=JSON.parse(token);
   }
   if(state.url.includes('/register') || state.url.includes('/login')){
+
     if(tokendata==null || tokendata==undefined ||new Date(tokendata.expiration)<new Date()){
       return true
     }

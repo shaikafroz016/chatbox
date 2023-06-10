@@ -8,14 +8,19 @@ import { LoginComponentsComponent } from './Components/login-components/login-co
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpinterceptorInterceptor } from './httpinterceptor.interceptor';
-import { ChatComponent } from './chat/chat.component';
+import { ChatComponent } from './Components/chat/chat.component';
+import { ConversationComponent } from './Components/chat/conversation/conversation.component';
+import { HeaderComponent } from './Components/header/header.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponentComponent,
     LoginComponentsComponent,
-    ChatComponent
+    ChatComponent,
+    ConversationComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
