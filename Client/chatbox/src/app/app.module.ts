@@ -8,12 +8,14 @@ import { LoginComponentsComponent } from './Components/login-components/login-co
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpinterceptorInterceptor } from './httpinterceptor.interceptor';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponentComponent,
-    LoginComponentsComponent
+    LoginComponentsComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,

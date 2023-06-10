@@ -16,12 +16,9 @@ export class HttpcallsService {
   }
   login(data:any){
 
-    this.http.post(this.url+`auth/login`,data).subscribe((e:any)=>{
-
-      localStorage.setItem('tocken',JSON.stringify(e))
-
-    })
-
-
+    return this.http.post(this.url+`auth/login`,data)
+  }
+  signup(data:any){
+    return this.http.post(this.url+`auth/register`,data)
   }
 }

@@ -2,16 +2,26 @@
 	<section class="login">
 		<div class="login_box">
 			<div class="left">
-				<div class="top_link"><a href="#"><img src="https://drive.google.com/u/0/uc?id=16U__U5dJdaTfNGobB_OpwAJ73vM50rPV&export=download" alt="">Return home</a></div>
 				<div class="contact">
 					<form [formGroup]="loginform">
+            <div *ngIf="error" class="alert alert-danger alert-dismissible fade show" role="alert" style="height: 70px;">
+              <strong class="text-wrap" style="max-width: 60px;">{{responsemessage}}</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
+            </div>
+            <div *ngIf="success" class="alert alert-success alert-dismissible fade show" role="alert" style="height: 70px;">
+              <strong class="text-wrap">{{responsemessage}}</strong>
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" ></button>
+            </div>
 						<h3>SIGN IN</h3>
 						<input type="text" formControlName="username" placeholder="USERNAME">
 						<input type="text" formControlName="password" placeholder="PASSWORD">
 						<button class="submit" (click)="onsubmit()" >Login</button>
+            <p style="padding: 25px;">Don't have an account? <a routerLink="/register" style="text-decoration:none">Sign up</a></p>
 					</form>
 				</div>
+
 			</div>
+
 			<div class="right">
 				<div class="right-text">
 					<h2>LONYX</h2>
