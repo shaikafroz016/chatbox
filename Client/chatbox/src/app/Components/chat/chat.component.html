@@ -25,12 +25,15 @@
                   </mat-form-field>
                 </form>
             </div>
+            <b>Contacts</b>
             </td>
 
 
           </tr>
         </thead>
-        <tbody *ngFor="let  user of contacts"  (click)="selected(user)">
+
+        <tbody *ngFor="let  user of contacts"  (click)="selected(user)"  >
+
          <tr ><td>{{user.name}}</td></tr>
         </tbody>
       </table>

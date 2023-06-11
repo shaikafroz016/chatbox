@@ -31,7 +31,7 @@ export class ConversationComponent implements OnInit,OnChanges{
 
     if(this.reciver?.userId){
 
-      this.username=this.reciver.name;
+      this.username=this.reciver?.name;
       this.getMessages();
     }
 
