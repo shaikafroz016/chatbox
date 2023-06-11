@@ -8,19 +8,29 @@
           <tr>
             <td>
               <div class="input-group">
-                <input class="form-control border-end-0 border rounded-pill" type="search" value="search" id="example-search-input">
-                <span class="input-group-append">
-                    <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button">
-                      <i class="bi bi-search"></i>
-                    </button>
-                </span>
+                <form  class="example-form">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Search</mat-label>
+                    <input type="text"
+                           placeholder="Search User"
+                           aria-label="User name"
+                           matInput
+                           [formControl]="searchform"
+                           [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+                      <mat-option *ngFor="let option of filteredOptions | async" [value]="option.name" >
+                        {{option.name}}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </form>
             </div>
             </td>
 
 
           </tr>
         </thead>
-        <tbody *ngFor="let  user of AllUsers"  (click)="selected(user)">
+        <tbody *ngFor="let  user of contacts"  (click)="selected(user)">
          <tr ><td>{{user.name}}</td></tr>
         </tbody>
       </table>

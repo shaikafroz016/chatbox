@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -22,9 +23,16 @@ export class HttpcallsService {
     return this.http.post(this.url+`auth/register`,data)
   }
   getUsers(){
-    return this.http.get(this.url+'auth/Users')
+  return firstValueFrom( this.http.get(this.url+'auth/Users')).then(res=>{
+    return res
+  });
   }
   savemessage(data:any){
     return this.http.post(this.url+`Chat/saveMessages`,data)
+  }
+  getcontacts(sender_id:string){
+    return firstValueFrom( this.http.get(this.url+`Chat/getcontacts?sender_id=${sender_id}`)).then(res=>{
+      return res
+    });
   }
 }

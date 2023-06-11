@@ -29,7 +29,7 @@ export class ConversationComponent implements OnInit,OnChanges{
     });
     this.sender_id=this.userservise.getUserId;
 
-    if(this.reciver.userId){
+    if(this.reciver?.userId){
 
       this.username=this.reciver.name;
       this.getMessages();
@@ -38,7 +38,7 @@ export class ConversationComponent implements OnInit,OnChanges{
   }
   getMessages(){
 
-   if(this.reciver.userId!=''){
+   if(this.reciver?.userId!=''){
     this.httpservice
     .getchats(this.sender_id,this.reciver.userId)
     .subscribe((arg) => {
@@ -57,8 +57,11 @@ export class ConversationComponent implements OnInit,OnChanges{
       this.httpservice.savemessage(x).subscribe(e=>{
         console.log(e);
         this.sendform.reset()
+        this.getMessages();
       })
     }
+
   }
+
 
 }

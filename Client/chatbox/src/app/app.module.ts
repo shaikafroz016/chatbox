@@ -11,6 +11,10 @@ import { HttpinterceptorInterceptor } from './httpinterceptor.interceptor';
 import { ChatComponent } from './Components/chat/chat.component';
 import { ConversationComponent } from './Components/chat/conversation/conversation.component';
 import { HeaderComponent } from './Components/header/header.component';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import { MaterialModule } from './material/material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 
 @NgModule({
@@ -26,7 +30,10 @@ import { HeaderComponent } from './Components/header/header.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MaterialModule,
+    BrowserAnimationsModule
+
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpinterceptorInterceptor, multi: true },
