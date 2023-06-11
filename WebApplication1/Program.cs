@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using WebApplication1.Context;
+using WebApplication1.Models;
 using WebApplication1.Repository;
 using WebApplication1.Repository.interfaces;
 
@@ -12,7 +13,7 @@ ConfigurationManager configuration = builder.Configuration;
 
 // Add services to the container.
 builder.Services.AddDbContext<applicationDBContext>(options => options.UseSqlServer(configuration.GetConnectionString("constr")));
-
+builder.Services.AddSignalR();
 // For Identity
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<applicationDBContext>()
@@ -62,5 +63,5 @@ app.UseAuthorization();
 
 
 app.MapControllers();
-
+app.MapHub<ChatHub>("/api/Chat/saveMessages");
 app.Run();

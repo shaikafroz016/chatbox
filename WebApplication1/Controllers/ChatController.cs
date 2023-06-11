@@ -42,6 +42,8 @@ namespace WebApplication1.Controllers
             try
             {
                 var message_id = await _repo.SaveMessage(data);
+                ChatHub chatHub = new ChatHub();
+               await chatHub.SendMessage(data.sender_id, data.reciver_id, data.content);
                 return Ok(message_id);
             }
             catch (Exception ex)
