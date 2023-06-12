@@ -14,6 +14,7 @@ export class ConversationComponent implements OnInit,OnChanges{
   data: any;
   username:any;
   sendform:any;
+  notification:any=[];
   constructor(private userservise:CommonService,private httpservice:HttpcallsService){
 
   }
@@ -28,7 +29,16 @@ export class ConversationComponent implements OnInit,OnChanges{
       message: new FormControl(null,[Validators.required])
     });
     this.sender_id=this.userservise.getUserId;
+    this.httpservice.onMessageRecived().subscribe(data=>{
+      if(data?.reciver_id==this.reciver?.userId){
+        this.data.push(data)
+      }
+      else{
+        this.notification.push(data?.reciver_id);
+      }
 
+
+    });
     if(this.reciver?.userId){
 
       this.username=this.reciver?.name;
@@ -57,7 +67,7 @@ export class ConversationComponent implements OnInit,OnChanges{
       this.httpservice.savemessage(x).subscribe(e=>{
         console.log(e);
         this.sendform.reset()
-        this.getMessages();
+
       })
     }
 

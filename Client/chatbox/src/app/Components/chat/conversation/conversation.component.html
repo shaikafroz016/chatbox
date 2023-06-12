@@ -13,13 +13,18 @@
   <body>
     <!-- Main container -->
     <div class="container">
+      <div class="demo-section">
+        <span class="badge " style="color:black">New Notifications&nbsp;{{notification.length}}</span>
+      </div>
       <!-- msg-header section starts -->
       <div class="msg-header">
+
         <div class="container1">
           <img src="https://t4.ftcdn.net/jpg/04/83/90/95/360_F_483909569_OI4LKNeFgHwvvVju60fejLd9gj43dIcd.jpg" class="msgimg" />
           <div class="active">
             <p style="margin-top: 10px;">{{username}}</p>
           </div>
+
         </div>
       </div>
       <!-- msg-header section ends -->
@@ -54,9 +59,9 @@
                 placeholder="Write message..."
               />
 
-              <span (click)="onsend()" class="input-group-text send-icon">
+              <button type="submit" (click)="onsend()" class="input-group-text send-icon">
                 <i class="bi bi-send"></i>
-              </span>
+              </button>
             </form>
             </div>
           </div>

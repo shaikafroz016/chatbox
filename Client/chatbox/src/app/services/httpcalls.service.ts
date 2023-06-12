@@ -14,13 +14,13 @@ private mesagerecivedSubject:Subject<any>=new Subject<any>();
 
   constructor(private http:HttpClient) {
     this.hubConnection=new HubConnectionBuilder()
-    .withUrl('https://localhost:7066/api/Chat/saveMessages')
+    .withUrl('https://localhost:7066/signalhub')
     .build();
     this.hubConnection.start().catch(err=>{
       console.log(err);
     });
-    this.hubConnection.on('ReceiveMessage',(sender_id,reciver_id,message)=>{
-      this.mesagerecivedSubject.next({sender_id,reciver_id,message});
+    this.hubConnection.on('ReciveChat',(data)=>{
+      this.mesagerecivedSubject.next(data);
     })
   }
 
@@ -42,12 +42,14 @@ private mesagerecivedSubject:Subject<any>=new Subject<any>();
   }
   savemessage(data:any){
     let x= this.http.post(this.url+`Chat/saveMessages`,data)
-    this.hubConnection?.invoke('ReceiveMessage',data.sender_id, data.reciver_id, data.content);
+    this.hubConnection?.invoke('ReciveChat',(data));
     return x;
   }
-  onMessageRecived():Subject<any>{
+  public onMessageRecived():Subject<any>{
+    console.log(this.mesagerecivedSubject);
     return this.mesagerecivedSubject;
   }
+
   getcontacts(sender_id:string){
     return firstValueFrom( this.http.get(this.url+`Chat/getcontacts?sender_id=${sender_id}`)).then(res=>{
       return res

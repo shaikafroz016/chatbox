@@ -10,13 +10,13 @@ private hubConnection:HubConnection | undefined;
 private mesagerecivedSubject:Subject<any>=new Subject<any>();
   constructor() {
     this.hubConnection=new HubConnectionBuilder()
-    .withUrl('https://localhost:7066/api/Chat/saveMessages')
+    .withUrl('https://localhost:7066/signalhub')
     .build();
     this.hubConnection.start().catch(err=>{
       console.log(err);
     });
-    this.hubConnection.on('ReceiveMessage',(sender_id,reciver_id,message)=>{
-      this.mesagerecivedSubject.next({sender_id,reciver_id,message});
+    this.hubConnection.on('ReciveChat',data=>{
+      this.mesagerecivedSubject.next({data})
     })
   }
 }

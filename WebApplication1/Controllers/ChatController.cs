@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Data.SqlClient;
 using WebApplication1.Models;
 using WebApplication1.Repository.interfaces;
@@ -13,10 +14,12 @@ namespace WebApplication1.Controllers
     [ApiController]
     public class ChatController : ControllerBase
     {
+        public IHubContext<ChatHub> _hubContext;
         public readonly Irepository _repo;
-        public ChatController(Irepository config)
+        public ChatController(Irepository config, IHubContext<ChatHub> hubContext)
         {
             _repo = config;
+            _hubContext = hubContext;
         }
 
         [HttpGet]
@@ -42,8 +45,14 @@ namespace WebApplication1.Controllers
             try
             {
                 var message_id = await _repo.SaveMessage(data);
-                ChatHub chatHub = new ChatHub();
-               await chatHub.SendMessage(data.sender_id, data.reciver_id, data.content);
+                GetMessages gs = new GetMessages();
+                gs.sender_id = data.sender_id;
+                gs.reciver_id = data.reciver_id;
+                gs.message_id = 321;
+                gs.chat = data.content;
+                gs.created_at = DateTime.Now;
+                gs.messageType = "Sender";
+                await _hubContext.Clients.All.SendAsync("ReciveChat", gs);
                 return Ok(message_id);
             }
             catch (Exception ex)

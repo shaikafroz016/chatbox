@@ -4,9 +4,9 @@ namespace WebApplication1.Models
 {
     public class ChatHub : Hub
     {
-        public async Task SendMessage(string sender_id,string reciver_id,string message)
+        public void  SendMessage(GetMessages data)
         {
-            await Clients.All.SendAsync("ReceiveMessage",sender_id,reciver_id,message);
+             Clients.All.SendAsync("ReciveChat", data);
         }
     }
 }
