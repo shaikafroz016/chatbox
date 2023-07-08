@@ -5,6 +5,7 @@ import { Observable, map, startWith } from 'rxjs';
 import { AuthcheckService } from 'src/app/services/authcheck.service';
 import { CommonService } from 'src/app/services/common.service';
 import { HttpcallsService } from 'src/app/services/httpcalls.service';
+import { ObservableService } from 'src/app/services/observable.service';
 
 @Component({
   selector: 'app-chat',
@@ -18,9 +19,10 @@ export class ChatComponent implements OnInit{
   contactlist:any=[]
   filteredOptions!: Observable<any>;
   contacts:any=[]
+  isrefreshcontact: any;
 
 
-constructor(private router:Router,private authservice:AuthcheckService,private httpservice:HttpcallsService,private userservise:CommonService){
+constructor(private router:Router,private authservice:AuthcheckService,private httpservice:HttpcallsService,private userservise:CommonService,private _observable:ObservableService){
 
 }
  async ngOnInit() {
@@ -35,8 +37,15 @@ constructor(private router:Router,private authservice:AuthcheckService,private h
       map(value => this._filter(value || '')),
     );
     this.filtercontact()
-
+      this._observable.reciveCallContactValue().subscribe(async res=>{
+        if(res){
+          this.contacts=[];
+          await this.getcontactsList();
+          this.filtercontact();
+        }
+      })
   }
+   
   filtercontact(){
     this.contactlist=this.contactlist.reciverslists;
     this.contactlist.forEach((element:any) => {

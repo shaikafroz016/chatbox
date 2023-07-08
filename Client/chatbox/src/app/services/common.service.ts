@@ -13,7 +13,7 @@ export class CommonService {
   }
   }
 
-  userName:string=''
+  userName:string='' 
   userId:string=''
   tokenData:any
   setuserName(username:string){

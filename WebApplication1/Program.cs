@@ -48,10 +48,14 @@ builder.Services.AddScoped<Irepository, repository>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
-//builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
-//{
-//    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-//}));
+builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+{
+    builder.
+AllowAnyMethod()
+       .AllowAnyHeader()
+       .SetIsOriginAllowed(origin => true)
+       .AllowCredentials();
+}));
 
 var app = builder.Build();
 
@@ -61,7 +65,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-//app.UseCors("corsapp");
+app.UseCors("corsapp");
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
